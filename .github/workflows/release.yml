@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          # Will fetch all history and tags required to generate version
+          fetch-depth: 0
+      - name: Git Version
+        id: generate-version
+        uses: codacy/git-version@2.4.0
+      - name: "Tag version"
+        run: |
+          git tag ${{ steps.generate-version.outputs.version }}
+          git push --tags "https://codacy:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
+      - name: "Push data to pulse"
+        uses: ./
+        with:
+          args: |
+            push git deployment \
+              --api-key ${{ secrets.PULSE_ORG_PULSE_API_KEY }} \
+              --system $GITHUB_REPOSITORY \
+              --previous-deployment-ref ${{ steps.generate-version.outputs.previous-version }} \
+              --identifier ${{ steps.generate-version.outputs.version }} \
+              --timestamp "$(date +%s)"
