@@ -1,4 +1,4 @@
-name: Pulse
+name: Pulse Events CLI
 author: "Codacy"
 description: "Push deployment and change events to Codacy's Pulse service"
 branding:
