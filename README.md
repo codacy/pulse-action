@@ -45,10 +45,10 @@ jobs:
 
       # Push deployment and changes events to pulse
       - name: "Push data to pulse"
-        uses: ./
+        uses: codacy/pulse-action@0.0.3
         with:
           args: push git deployment \
-            --api-key ${{ secrets.PULSE_ORGANIZATION_API_KEY }} \
+            --api-key ${{ secrets.PULSE_API_KEY }} \
             --system $GITHUB_REPOSITORY \
             --previous-deployment-ref ${{ steps.generate-version.outputs.previous-version }} \
             --identifier ${{ steps.generate-version.outputs.version }} \
