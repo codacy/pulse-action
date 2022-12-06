@@ -6,7 +6,7 @@ Take a look at Pulse's documentation [here](https://docs.pulse.codacy.com).
 
 ## Github Action
 
-You can use this Github-Action to send changes and deployment events to Pulse's service
+You can use this GitHub Action to send changes and deployment events to Pulse's service
 directly from you CI.
 
 The following workflow is an example where [git-version](https://github.com/codacy/git-version) is used to
