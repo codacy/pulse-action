@@ -8,13 +8,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
         with:
           # Will fetch all history and tags required to generate version
           fetch-depth: 0
       - name: Git Version
         id: generate-version
-        uses: codacy/git-version@2.4.0
+        uses: codacy/git-version@fa06788276d7492a2af01662649696d249ecf4cb # 2.4.0
       - name: "Tag version"
         run: |
           git tag ${{ steps.generate-version.outputs.version }}
